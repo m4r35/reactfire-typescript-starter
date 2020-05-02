@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  useFirestoreDocData,
+  useFirestore,
+  SuspenseWithPerf,
+  useFirebaseApp,
+} from "reactfire";
 
 function App() {
+  const appObj = useFirebaseApp();
+  (window as any).reactfire = appObj;
+
+  const appRef = useFirestore().collection("crm").doc("app");
+  const app: firebase.firestore.DocumentData = useFirestoreDocData(appRef);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SuspenseWithPerf fallback={"load app ..."} traceId={"load-app"}>
+        <p>{app.isUp ? "up and running!" : "nope"}</p>
+      </SuspenseWithPerf>
     </div>
   );
 }
