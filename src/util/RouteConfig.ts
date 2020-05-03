@@ -7,6 +7,10 @@ export const routeConfig = {
     path: "/profile",
     url: () => "/profile",
   },
+  register: {
+    path: "/register",
+    url: () => "/register",
+  },
   login: {
     path: "/login",
     url: () => "/login",

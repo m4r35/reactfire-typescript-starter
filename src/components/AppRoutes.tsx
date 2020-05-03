@@ -7,6 +7,7 @@ import BootstrapApp from "./BootstrapApp";
 import Profile from "./Profile";
 import { routeConfig } from "../util/RouteConfig";
 import HomePage from "./Homepage";
+import RegistrationPage from "./Register";
 
 interface AppProps {
   history: History;
@@ -24,6 +25,7 @@ function App({ history }: AppProps) {
   const outsideRoutes = [
     routeConfig.login.path,
     routeConfig.passwordReset.path,
+    routeConfig.register.path,
   ];
 
   return (
@@ -33,6 +35,9 @@ function App({ history }: AppProps) {
           <Switch>
             <Route exact={true} path={routeConfig.login.path}>
               <LoginPage />
+            </Route>
+            <Route exact={true} path={routeConfig.register.path}>
+              <RegistrationPage />
             </Route>
           </Switch>
         </Route>
