@@ -1,6 +1,5 @@
 const getEnv = (variable: string): string => {
   const value = process.env[variable];
-  console.log("process.env:", process.env);
 
   if (typeof value !== "string") {
     throw new Error(`'${variable}' env var must be provided`);

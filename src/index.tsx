@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import AppRoutes from "./components/AppRoutes";
 import * as serviceWorker from "./serviceWorker";
 import { FirebaseAppProvider } from "reactfire";
 import {
@@ -13,6 +13,11 @@ import {
   REACT_APP_FIREBASE_APP_ID,
   REACT_APP_FIREBASE_MEASUREMENT_ID,
 } from "./constants";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import Loading from "./components/Page/Loading";
+
+const history = createBrowserHistory();
 
 const firebaseConfig = {
   apiKey: REACT_APP_FIREBASE_API_KEY,
@@ -25,15 +30,13 @@ const firebaseConfig = {
   measurementId: REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-const Loading = () => {
-  return <p>Loading ...</p>;
-};
-
 ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={<Loading />}>
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-        <App />
+        <Router history={history}>
+          <AppRoutes history={history} />
+        </Router>
       </FirebaseAppProvider>
     </React.Suspense>
   </React.StrictMode>,
